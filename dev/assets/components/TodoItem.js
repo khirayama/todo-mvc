@@ -5,7 +5,8 @@ import Component from '../framework/Component';
 export default class TodoItem extends Component {
   constructor(todo) {
     super('template', {
-      isEditing: false
+      isEditing: false,
+      touches: []
     }, {
       todo: todo
     });
@@ -23,7 +24,7 @@ export default class TodoItem extends Component {
     });
     this.on('blur', '.edit', (event) => {
       let text = event.target.value;
-      this.setState({isEditing: false});
+      this.setState({ isEditing: false });
       TodoActions.updateText(this.props.todo.id, text);
     });
     this.on('keyup', '.edit', (event) => {
@@ -31,21 +32,14 @@ export default class TodoItem extends Component {
       this.el.querySelector('.edit').blur();
     });
     this.on('touchmove', (event) => {
-      this.touches = event.touches;
+      event.preventDefault();
+      this.setState({ touches: event.touches }, false);
     });
     this.on('touchend', () => {
-      if(!this.touches) return;
-      let todo = this.props.todo;
-      let touchesPos = this.touches[0];
-      let targetElement = document.elementFromPoint(touchesPos.clientX, touchesPos.clientY);
-      let event = new Event('select');
-      event.moveTodo = todo;
-      targetElement.dispatchEvent(event);
+      this.onTouchmove();
     });
     this.on('select', 'label', (event) => {
-      let from = event.moveTodo.order;
-      let to = this.props.todo.order;
-      TodoActions.updateOrders(from, to);
+      this.onSelect();
     });
   }
   template() {
@@ -55,16 +49,30 @@ export default class TodoItem extends Component {
     })}">
       <div class="Component">
         <div class="toggle"></div>
-        ${this.input()}
+        ${this.inputTemplate()}
         <div class="destroy"></div>
       </div>
     </li>`;
   }
-  input() {
+  inputTemplate() {
     if(this.state.isEditing) {
       return `<input class="edit" type="text" value="${this.props.todo.text}"></input>`;
     } else {
       return `<label>${this.props.todo.text}</label>`;
     }
+  }
+  onTouchmove() {
+    if(!this.state.touches.length) return;
+    let todo = this.props.todo;
+    let touchesPos = this.state.touches[0];
+    let targetElement = document.elementFromPoint(touchesPos.clientX, touchesPos.clientY);
+    let event = new Event('select');
+    event.moveTodo = todo;
+    targetElement.dispatchEvent(event);
+  }
+  onSelect() {
+    let from = event.moveTodo.order;
+    let to = this.props.todo.order;
+    TodoActions.updateOrders(from, to);
   }
 }

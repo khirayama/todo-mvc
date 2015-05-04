@@ -149,6 +149,9 @@ body {
         display: none;
       }
     }
+    &.moving {
+      background: red;
+    }
     .toggle {
       position: absolute;
       top: 0;
