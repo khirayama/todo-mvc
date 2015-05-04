@@ -6,7 +6,8 @@ export default class TodoItem extends Component {
   constructor(todo) {
     super('template', {
       isEditing: false,
-      touches: []
+      touchStart: [],
+      touchEnd: []
     }, {
       todo: todo
     });
@@ -31,15 +32,18 @@ export default class TodoItem extends Component {
       if(event.keyCode !== 13) return;
       this.el.querySelector('.edit').blur();
     });
+    this.on('touchstart', (event) => {
+      this.setState({ touchStart: event.touches }, false);
+    });
     this.on('touchmove', (event) => {
       event.preventDefault();
-      this.setState({ touches: event.touches }, false);
+      this.setState({ touchEnd: event.touches }, false);
     });
     this.on('touchend', () => {
-      this.onTouchmove();
+      this.onTouchend();
     });
     this.on('select', 'label', (event) => {
-      this.onSelect();
+      this.onSelect(event);
     });
   }
   template() {
@@ -48,9 +52,7 @@ export default class TodoItem extends Component {
       'editing': this.state.isEditing
     })}">
       <div class="Component">
-        <div class="toggle"></div>
         ${this.inputTemplate()}
-        <div class="destroy"></div>
       </div>
     </li>`;
   }
@@ -61,16 +63,16 @@ export default class TodoItem extends Component {
       return `<label>${this.props.todo.text}</label>`;
     }
   }
-  onTouchmove() {
-    if(!this.state.touches.length) return;
+  onTouchend() {
+    if(!this.state.touchEnd.length) return;
     let todo = this.props.todo;
-    let touchesPos = this.state.touches[0];
+    let touchesPos = this.state.touchEnd[0];
     let targetElement = document.elementFromPoint(touchesPos.clientX, touchesPos.clientY);
     let event = new Event('select');
     event.moveTodo = todo;
     targetElement.dispatchEvent(event);
   }
-  onSelect() {
+  onSelect(event) {
     let from = event.moveTodo.order;
     let to = this.props.todo.order;
     TodoActions.updateOrders(from, to);

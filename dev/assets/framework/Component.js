@@ -19,9 +19,7 @@ export default class View {
   }
   setState(state, update = true) {
     this.state = Object.assign({}, this.state, state);
-    if(update) {
-      this._update();
-    }
+    if(update) this._update();
   }
   on(eventType, selector, callback) {
     if(arguments.length === 2) {
