@@ -47,18 +47,15 @@ class Todo extends Store {
     delete this._todos[id];
   }
   _updateOrders(from, to) {
-    if(from > to) {
-      for(let id in this._todos) {
-        let todo = this._todos[id];
+    for(let id in this._todos) {
+      let todo = this._todos[id];
+      if(from > to) {
         if(todo.order >= to && todo.order < from) {
           todo.order += 1;
         } else if(todo.order === from) {
           todo.order = to;
         }
-      }
-    } else if(to > from) {
-      for(let id in this._todos) {
-        let todo = this._todos[id];
+      } else if(to > from) {
         if(todo.order > from && todo.order <= to) {
           todo.order -= 1;
         } else if(todo.order === from) {
