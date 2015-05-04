@@ -1,0 +1,42 @@
+{
+  "name": "origin_project",
+  "version": "0.0.1",
+  "description": "app",
+  "keywords": [
+    "framework"
+  ],
+  "homepage": "http://",
+  "bugs": "http://github.com/khirayama/hogehoge/issues",
+  "files": [
+    "index.js",
+    "dev/",
+    "LICENSE",
+    "PATENTS"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "setup-env": "sudo npm i -g gulp mocha npm-check-updates",
+    "update-package": "sudo npm-check-updates -u",
+    "start": "gulp develop",
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khirayama/hogehoge"
+  },
+  "author": "Kotaro Hirayama",
+  "license": "BSD",
+  "devDependencies": {
+    "babel": "^5.1.13",
+    "babelify": "^6.0.2",
+    "browser-sync": "^2.6.5",
+    "gulp": "^3.8.11",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jade": "^1.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-pleeease": "^1.2.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-sass": "^1.3.3",
+    "gulp-spawn-mocha": "^2.0.1"
+  }
+}
