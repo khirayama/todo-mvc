@@ -22,6 +22,7 @@ input, textarea {
   vertical-align: baseline;
   word-wrap: break-word;
   word-break: break-all;
+  white-space: normal;
   font-weight: normal;
   font-style:normal;
   font-size: 100%;
@@ -62,29 +63,31 @@ img {
 $font-s: .8rem;
 $font-normal: 14px;
 $font-l: 1.2rem;
-$font-xl: 1.2rem;
+$font-xl: 1.5rem;
 $font-xxl: 2rem;
 // color
 $text-color: #4d4d4d;
 $text-nonactive-color: #a9a9a9;
-$body-bg-color: #aaa;
+$body-bg-color: #eee;
 $app-bg-color: #fff;
 $border-color: #999;
 // helper -------------------------------------------------------------------
 // margin / padding
+$p1: 4px;
+$p2: 8px;
+$p3: 12px;
+$p4: 16px;
+$p5: 20px;
 // text-align
 // float
 // radius
 // shadow
+$box-shadow: 0 2px 1px 1px rgba(0, 0, 0, .1);
 // basic --------------------------------------------------------------------
 html {
-  font-size: $font-normal;
-}
-body {
   color: $text-color;
-  vertical-align: baseline;
   text-align: justify;
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: $font-normal 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   -webkit-text-size-adjust: 100%;
 }
@@ -97,115 +100,47 @@ body {
 #todoapp {
   position: relative;
   background: $app-bg-color;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
-}
-#new-todo,
-.edit {
-  position: relative;
-  padding: 6px;
-  width: 100%;
-  border: 1px solid $border-color;
-  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
-  font-size: 24px;
+  box-shadow: $box-shadow;
 }
 #new-todo {
-  z-index: 2;
-  padding: 16px;
-  border: none;
-  background: rgba(0, 0, 0, 0.02);
-  box-shadow: none;
+  position: relative;
+  width: 100%;
+  height: 65px;
+  padding: 0 $p4;
+  font-size: 2rem;
 }
 #main {
   position: relative;
-  z-index: 2;
 }
 #todo-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
   li {
     position: relative;
     border-bottom: 1px dotted $border-color;
-    font-size: 24px;
-    &:last-child {
-      border-bottom: none;
-    }
-    .edit {
-      display: inline;
-    }
-    &.editing {
-      input {
-        display: block;
-        display: block;
-        margin: 0;
-        padding: 15px;
-        white-space: pre;
-        word-break: break-word;
-        font-size: 24px;
-        line-height: 1.2;
-        transition: color 0.4s;
-      }
-      label {
-        display: none;
-      }
-    }
-    &.moving {
-      background: red;
-    }
-    .toggle {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      display: block;
-      margin: auto 0;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      font-size: 22px;
-      line-height: 40px;
-      appearance: none;
-      &:after {
-        content: '✔︎';
-      }
-    }
+    font-size: 2rem;
+    transition: background .2s ease-out, transform .2s ease-out;
     label {
+      width: 100%;
+      height: 65px;
+      line-height: 65px;
+      padding: 0 16px;
       display: block;
-      margin: 0 45px;
-      padding: 15px;
-      white-space: pre;
       word-break: break-word;
-      line-height: 1.2;
-      transition: color 0.4s;
+      user-select: none;
     }
-    &.completed label {
+    input { // editing
+      display: block;
+      width: 100%;
+      height: 65px;
+      line-height: 65px;
+      padding: 0 16px;
+    }
+    &.completed {
       color: $text-nonactive-color;
       text-decoration: line-through;
     }
-    .destroy {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      display: block;
-      margin: auto 0;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      font-size: 22px;
-      line-height: 40px;
-      &:after {
-        content: '✖';
-      }
-    }
-    .edit {
-      display: none;
-    }
-    &.editing:last-child {
-      margin-bottom: -1px;
-    }
-    input {
-      display: none;
+    &.selecting {
+      background: #333;
+      transform: scale(1.1, 1.1);
     }
   }
 }

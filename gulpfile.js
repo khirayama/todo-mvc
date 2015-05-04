@@ -54,6 +54,11 @@ gulp.task('scripts', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('libs', function() {
+  return gulp.src(['dev/assets/libs/*.js'])
+    .pipe(gulp.dest('public/libs/'));
+});
+
 gulp.task('files', function() {
   return gulp.src(['dev/**/*.+(png|jpg|gif)'])
     .pipe(plumber(options.plumber))
@@ -67,7 +72,7 @@ gulp.task('test', function() {
     }));
 });
 
-gulp.task('browserSync', ['markups', 'styles', 'scripts', 'files'], function() {
+gulp.task('browserSync', ['markups', 'styles', 'scripts', 'libs', 'files'], function() {
   return browserSync.init(null, {
     server: {baseDir: 'public/'},
     notify: false
@@ -77,7 +82,7 @@ gulp.task('browserSync', ['markups', 'styles', 'scripts', 'files'], function() {
 gulp.task('watch', function() {
   gulp.watch(['dev/**/*.scss'], ['styles']);
   gulp.watch(['dev/**/*.jade'], ['markups']);
-  gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts']);
+  gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts', 'libs']);
   gulp.watch(['dev/**/*.test.js'], ['test']);
   gulp.watch(['dev/**/*.+(png|jpg|gif)'], ['files']);
 });
