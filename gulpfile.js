@@ -75,7 +75,8 @@ gulp.task('test', function() {
 gulp.task('browserSync', ['markups', 'styles', 'scripts', 'libs', 'files'], function() {
   return browserSync.init(null, {
     server: {baseDir: 'public/'},
-    notify: false
+    notify: false,
+    open: 'external'
   });
 });
 
