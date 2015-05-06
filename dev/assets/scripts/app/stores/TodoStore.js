@@ -1,6 +1,6 @@
 'use strict';
 import 'babel/polyfill';
-import Store from '../framework/Store';
+import Store from '../../framework/Store';
 
 class Todo extends Store {
   constructor() {

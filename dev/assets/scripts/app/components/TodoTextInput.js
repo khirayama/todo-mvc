@@ -1,7 +1,7 @@
 'use strict';
 import TodoStore from '../stores/TodoStore';
 import TodoActions from '../actions/TodoActions';
-import Component from '../framework/Component';
+import Component from '../../framework/Component';
 
 export default class TodoTextInput extends Component {
   constructor(el) {

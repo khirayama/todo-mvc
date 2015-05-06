@@ -1,7 +1,7 @@
 'use strict';
 import TodoStore from '../stores/TodoStore';
 import TodoItem from './TodoItem';
-import Component from '../framework/Component';
+import Component from '../../framework/Component';
 
 export default class TodoList extends Component {
   constructor(el) {

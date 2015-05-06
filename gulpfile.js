@@ -28,7 +28,7 @@ gulp.task('markups', function() {
 });
 
 gulp.task('styles', function() {
-  return gulp.src('dev/**/*.scss')
+  return gulp.src('dev/assets/styles/app.scss')
     .pipe(plumber(options.plumber))
     .pipe(sass({
       // indentedSyntax: true,
@@ -44,7 +44,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(['dev/app.js'])
+  return gulp.src(['dev/assets/scripts/app/app.js'])
     .pipe(plumber(options.plumber))
     .pipe(browserify({
       transform: ['babelify'],
@@ -54,14 +54,19 @@ gulp.task('scripts', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('libs', function() {
-  return gulp.src(['dev/assets/libs/*.js'])
-    .pipe(gulp.dest('public/libs/'));
+gulp.task('images', function() {
+  return gulp.src(['dev/**/*.+(png|jpg|gif)'])
+    .pipe(plumber(options.plumber))
+    .pipe(gulp.dest('public/'));
 });
 
 gulp.task('files', function() {
-  return gulp.src(['dev/**/*.+(png|jpg|gif)'])
-    .pipe(plumber(options.plumber))
+  return gulp.src(['dev/**/*.+(csv|json)'])
+    .pipe(gulp.dest('public/'));
+});
+
+gulp.task('uikit', function() {
+  return gulp.src(['dev/assets/styles/uikit.html'])
     .pipe(gulp.dest('public/'));
 });
 
@@ -72,7 +77,7 @@ gulp.task('test', function() {
     }));
 });
 
-gulp.task('browserSync', ['markups', 'styles', 'scripts', 'libs', 'files'], function() {
+gulp.task('browserSync', ['markups', 'styles', 'scripts', 'images', 'files', 'uikit'], function() {
   return browserSync.init(null, {
     server: {baseDir: 'public/'},
     notify: false,

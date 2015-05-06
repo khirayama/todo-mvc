@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>STYLE GUIDE</title>
+  </head>
+  <body>
+    <!-- texts /////////////////////////////////////////////////////////////////-->
+    <div>
+      <!-- standard headings -->
+      <h1>Heading</h1>
+      <h2>Heading</h2>
+      <h3>Heading</h3>
+      <h4>Heading</h4>
+      <h5>Heading</h5>
+      <h6>Heading</h6>
+      <!-- base type size -->
+      <p>The base type is 15px over 1.6 line height (24px)</p>
+      <!-- other styled text tags -->
+      <strong>Bolded</strong>
+      <em>Italicized</em>
+      <a>Colored</a>
+      <u>Underlined</u>
+    </div>
+
+    <!-- buttons /////////////////////////////////////////////////////////////////-->
+    <div>
+      <!-- standard buttons -->
+      <a class="button" href="#">Anchor button</a>
+      <button>Button element</button>
+      <input type="submit" value="submit input">
+      <input type="button" value="button input">
+      <!-- primary buttons -->
+      <a class="button button-primary" href="#">Anchor button</a>
+      <button class="button-primary">Button element</button>
+      <input class="button-primary" type="submit" value="submit input">
+      <input class="button-primary" type="button" value="button input">
+    </div>
+
+    <!-- forms /////////////////////////////////////////////////////////////////-->
+    <div>
+      <!-- form -->
+      <form>
+        <div class="row">
+          <div class="six columns">
+            <label for="exampleEmailInput">Your email</label>
+            <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
+          </div>
+          <div class="six columns">
+            <label for="exampleRecipientInput">Reason for contacting</label>
+            <select class="u-full-width" id="exampleRecipientInput">
+              <option value="Option 1">Questions</option>
+              <option value="Option 2">Admiration</option>
+              <option value="Option 3">Can I get your number?</option>
+            </select>
+          </div>
+        </div>
+        <label for="exampleMessage">Message</label>
+        <textarea class="u-full-width" id="exampleMessage"></textarea>
+        <label class="example-send-yourself-copy">
+          <input type="checkbox">
+          <span class="label-body">Send a copy to yourself</span>
+        </label>
+        <input class="button-primary" type="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- lists /////////////////////////////////////////////////////////////////-->
+    <div>
+      <!-- unorder list -->
+      <ul>
+        <li>Item 1</li>
+        <li>
+          Item 2
+          <ul>
+            <li>Item 2.1</li>
+            <li>Item 2.2</li>
+          </ul>
+        </li>
+        <li>Item 3</li>
+      </ul>
+      <!-- order list -->
+      <ol>
+        <li>Item 1</li>
+        <li>
+          Item 2
+          <ul>
+            <li>Item 2.1</li>
+            <li>Item 2.2</li>
+          </ul>
+        </li>
+        <li>Item 3</li>
+      </ol>
+    </div>
+
+    <!-- tables /////////////////////////////////////////////////////////////////-->
+    <div>
+      <!-- table -->
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dave Gamache</td>
+            <td>26</td>
+            <td>Male</td>
+            <td>San Francisco</td>
+          </tr>
+          <tr>
+            <td>Dwayne Johnson</td>
+            <td>42</td>
+            <td>Male</td>
+            <td>Hayward</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </body>
+</html>

@@ -1,6 +1,6 @@
 'use strict';
 import TodoActions from '../actions/TodoActions';
-import Component from '../framework/Component';
+import Component from '../../framework/Component';
 
 export default class TodoItem extends Component {
   constructor(todo) {
