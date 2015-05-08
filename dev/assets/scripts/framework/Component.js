@@ -5,6 +5,7 @@ export default class View {
   // TODO: animationを考慮したAPIの追加（animationってなんかダサいからUIとかにしよう）
   // TODO: renderメソッドとtemplateメソッドをうまく抽象化して吸収したほうがいい
   // TODO: html escape
+  // TODO: classの付け替えとかはサポートcxだと再レンダリングしてしまい、アニメーションがきつい
   constructor(el, state = {}, props = {}) {
     this.state = state;
     this.props = props;
