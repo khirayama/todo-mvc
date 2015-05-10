@@ -88,7 +88,7 @@ gulp.task('browserSync', ['markups', 'styles', 'scripts', 'images', 'files', 'ui
 gulp.task('watch', function() {
   gulp.watch(['dev/**/*.scss'], ['styles']);
   gulp.watch(['dev/**/*.jade'], ['markups']);
-  gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts', 'libs']);
+  gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts']);
   gulp.watch(['dev/**/*.test.js'], ['test']);
   gulp.watch(['dev/**/*.+(png|jpg|gif)'], ['files']);
 });
