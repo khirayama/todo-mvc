@@ -6,6 +6,7 @@ export default class View {
   // TODO: renderメソッドとtemplateメソッドをうまく抽象化して吸収したほうがいい
   // TODO: html escape
   // TODO: classの付け替えとかはサポートcxだと再レンダリングしてしまい、アニメーションがきつい
+  // TODO: classを自動で振るようにしてみるか？TodoItemだったら.todo-item的な？extendsまで
   constructor(el, state = {}, props = {}) {
     this.state = state;
     this.props = props;
