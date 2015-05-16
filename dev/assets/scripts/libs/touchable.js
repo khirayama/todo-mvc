@@ -1,4 +1,4 @@
-( () => {
+(() => {
   if ('ontouchend' in window) {
     let customEvent;
     let target = {};

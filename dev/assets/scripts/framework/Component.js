@@ -1,6 +1,4 @@
-'use strict';
-
-export default class View {
+export default class Component {
   // TODO: componentsの破棄（イベント消したり）
   // TODO: animationを考慮したAPIの追加（animationってなんかダサいからUIとかにしよう）
   // TODO: renderメソッドとtemplateメソッドをうまく抽象化して吸収したほうがいい
@@ -10,30 +8,28 @@ export default class View {
   constructor(el, state = {}, props = {}) {
     this.state = state;
     this.props = props;
-    if(typeof el === 'object') {
+    if (typeof el === 'object') {
       this.el = el;
-    } else if(typeof el === 'string') {
+    } else if (typeof el === 'string') {
       this.el = this._createElements(this.template());
     }
-    this.handleEvents();
-  }
-  handleEvents() {
+    if (this.handleEvents) this.handleEvents();
   }
   setState(state, update = true) {
     this.state = Object.assign({}, this.state, state);
-    if(update) this._update();
+    if (update) this._update();
   }
   on(eventType, selector, callback) {
-    if(arguments.length === 2) {
-      callback = selector;
-      this.el.addEventListener(eventType, callback);
+    if (arguments.length === 2) {
+      let _callback = selector;
+      this.el.addEventListener(eventType, _callback);
     } else if (arguments.length === 3) {
       let target = this.el.querySelector(selector);
-      if(target) target.addEventListener(eventType, callback);
+      if (target) target.addEventListener(eventType, callback);
     }
   }
   _update() {
-    if(!this.template) return;
+    if (!this.template) return;
     let parentNode = this.el.parentNode;
     let tmp = this._createElements(this.template());
     parentNode.replaceChild(tmp, this.el);
@@ -41,16 +37,14 @@ export default class View {
     this.handleEvents();
   }
   _createElements(template) {
-    var tmp = document.implementation.createHTMLDocument();
+    let tmp = document.implementation.createHTMLDocument();
     tmp.body.innerHTML = template;
     return tmp.body.children[0];
   }
   _cx(classNames) {
     let classStr = [];
-    for(let className in classNames) {
-      if(classNames[className]) {
-        classStr.push(className);
-      }
+    for (let className in classNames) {
+      if (classNames[className]) classStr.push(className);
     }
     return classStr.join(' ');
   }
