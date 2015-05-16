@@ -55,20 +55,16 @@ export default class TodoItem extends Component {
     </li>`;
   }
   inputTemplate() {
-    let dom = '';
     if (this.state.isEditing) {
-      dom = `<input class="edit" type="text" value="${this.props.todo.text}"></input>`;
-    } else {
-      dom = `<label>${this.props.todo.text}</label>`;
+      return `<input class="edit" type="text" value="${this.props.todo.text}"></input>`;
     }
-    return dom;
+    return `<label>${this.props.todo.text}</label>`;
   }
   onTouchmove() {
     this.setState({ touches: event.touches }, false);
   }
   onTouchend() {
     if (!this.state.touches.length) return;
-    // if(!this.state.touches.length || !this.state.isSelect) return;
     let todo = this.props.todo;
     let touchesPos = this.state.touches[0];
     let targetElement = document.elementFromPoint(touchesPos.clientX, touchesPos.clientY);

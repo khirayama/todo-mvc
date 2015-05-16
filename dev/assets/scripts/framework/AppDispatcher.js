@@ -1,2 +1,2 @@
-import Observer from './Observer';
-export default new Observer();
+import EventDispatcher from './EventDispatcher';
+export default new EventDispatcher();

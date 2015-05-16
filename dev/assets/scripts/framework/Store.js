@@ -1,10 +1,10 @@
 import 'babel/polyfill';
-import Observer from './Observer';
+import EventDispatcher from './EventDispatcher';
 import AppDispatcher from './AppDispatcher';
 
 const CHANGE_EVENT = 'CHANGE';
 
-export default class Store extends Observer {
+export default class Store extends EventDispatcher {
   constructor(actions) {
     super();
     for (let key in actions) {
