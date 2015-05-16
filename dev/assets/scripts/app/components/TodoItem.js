@@ -1,4 +1,3 @@
-'use strict';
 import TodoActions from '../actions/TodoActions';
 import Component from '../../framework/Component';
 
@@ -7,7 +6,7 @@ export default class TodoItem extends Component {
     super('template', {
       isEditing: false,
       isSelect: false,
-      touches: [],
+      touches: []
     }, {
       todo: todo
     });
@@ -29,7 +28,7 @@ export default class TodoItem extends Component {
       TodoActions.updateText(this.props.todo.id, text);
     });
     this.on('keyup', '.edit', (event) => {
-      if(event.keyCode !== 13) return;
+      if (event.keyCode !== 13) return;
       this.el.querySelector('.edit').blur();
     });
     this.on('touchmove', (event) => {
@@ -56,17 +55,19 @@ export default class TodoItem extends Component {
     </li>`;
   }
   inputTemplate() {
-    if(this.state.isEditing) {
-      return `<input class="edit" type="text" value="${this.props.todo.text}"></input>`;
+    let dom = '';
+    if (this.state.isEditing) {
+      dom = `<input class="edit" type="text" value="${this.props.todo.text}"></input>`;
     } else {
-      return `<label>${this.props.todo.text}</label>`;
+      dom = `<label>${this.props.todo.text}</label>`;
     }
+    return dom;
   }
   onTouchmove() {
     this.setState({ touches: event.touches }, false);
   }
   onTouchend() {
-    if(!this.state.touches.length) return;
+    if (!this.state.touches.length) return;
     // if(!this.state.touches.length || !this.state.isSelect) return;
     let todo = this.props.todo;
     let touchesPos = this.state.touches[0];

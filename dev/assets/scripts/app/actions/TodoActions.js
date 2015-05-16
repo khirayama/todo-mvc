@@ -2,18 +2,18 @@
 import AppDispatcher from '../../framework/AppDispatcher';
 
 let TodoActions = {
-  create: function(text) {
+  create: (text) => {
     AppDispatcher.dispatch('TODO_CREATE', {
       text: text
     });
   },
-  updateText: function(id, text) {
+  updateText: (id, text) => {
     AppDispatcher.dispatch('TODO_UPDATE_TEXT', {
       id: id,
       text: text
     });
   },
-  toggleComplete: function(todo) {
+  toggleComplete: (todo) => {
     let id = todo.id;
     if (todo.complete) {
       AppDispatcher.dispatch('TODO_UNDO_COMPLETE', {
@@ -25,12 +25,12 @@ let TodoActions = {
       });
     }
   },
-  destroy: function(id) {
+  destroy: (id) => {
     AppDispatcher.dispatch('TODO_DESTROY', {
       id: id
     });
   },
-  updateOrders: function(from, to) {
+  updateOrders: (from, to) => {
     AppDispatcher.dispatch('TODO_UPDATE_ORDERS', {
       from: from,
       to: to

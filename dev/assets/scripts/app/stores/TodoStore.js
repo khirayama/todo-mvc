@@ -1,4 +1,3 @@
-'use strict';
 import 'babel/polyfill';
 import Store from '../../framework/Store';
 
@@ -47,18 +46,19 @@ class Todo extends Store {
     delete this._todos[id];
   }
   _updateOrders(from, to) {
-    for(let id in this._todos) {
+    for (let id in this._todos) {
+      if (!{}.hasOwnProperty.call(this._todos, id)) return false;
       let todo = this._todos[id];
-      if(from > to) {
-        if(todo.order >= to && todo.order < from) {
+      if (from > to) {
+        if (todo.order >= to && todo.order < from) {
           todo.order += 1;
-        } else if(todo.order === from) {
+        } else if (todo.order === from) {
           todo.order = to;
         }
-      } else if(to > from) {
-        if(todo.order > from && todo.order <= to) {
+      } else if (to > from) {
+        if (todo.order > from && todo.order <= to) {
           todo.order -= 1;
-        } else if(todo.order === from) {
+        } else if (todo.order === from) {
           todo.order = to;
         }
       }
@@ -66,11 +66,12 @@ class Todo extends Store {
   }
   getAll() {
     let todos = [];
-    for(let key in this._todos) {
+    for (let key in this._todos) {
+      if (!{}.hasOwnProperty.call(this._todos, key)) return false;
       let todo = this._todos[key];
       todos.push(todo);
     }
-    todos.sort(function(a, b) {
+    todos.sort((a, b) => {
       let x = a.order;
       let y = b.order;
       return (x > y) ? 1 : -1;

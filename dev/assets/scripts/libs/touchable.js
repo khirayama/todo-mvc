@@ -1,16 +1,15 @@
-'use strict';
-(function() {
+( () => {
   if ('ontouchend' in window) {
-    var customEvent;
-    var target = {};
-    var touches = {
+    let customEvent;
+    let target = {};
+    let touches = {
       start: {},
       end: {},
       diff: {}
     };
-    var swipeDistance = 40;
-    var holdInterval = 500;
-    var holdTimer;
+    let swipeDistance = 40;
+    let holdInterval = 500;
+    let holdTimer;
 
     function initializeTouch(event) {
       target = event.target;
@@ -19,7 +18,7 @@
         y: event.touches[0].clientY
       };
       // touchhold
-      holdTimer = setTimeout(function() {
+      holdTimer = setTimeout(() => {
         customEvent = new Event('touchhold');
         customEvent.touches = touches;
         event.target.dispatchEvent(customEvent);
@@ -39,24 +38,24 @@
       document.dispatchEvent(customEvent);
     }
 
-    function callEvents(event) {
+    function callEvents() {
       clearTimeout(holdTimer);
       // tap / taphold / swipeup / swipedown / swipeleft / swiperight / select
-      var eventType = '';
-      if(!touches.end.x) {
+      let eventType = '';
+      if (!touches.end.x) {
         eventType = 'tap';
-      } else if(Math.abs(touches.diff.y) > Math.abs(touches.diff.x)) {
-        if(Math.abs(touches.diff.y) > swipeDistance) {
-          if(touches.diff.y > 0) eventType = 'swipeup';
-          if(touches.diff.y < 0) eventType = 'swipedown';
+      } else if (Math.abs(touches.diff.y) > Math.abs(touches.diff.x)) {
+        if (Math.abs(touches.diff.y) > swipeDistance) {
+          if (touches.diff.y > 0) eventType = 'swipeup';
+          if (touches.diff.y < 0) eventType = 'swipedown';
         }
-      } else if(Math.abs(touches.diff.x) > Math.abs(touches.diff.y)) {
-        if(Math.abs(touches.diff.x) > swipeDistance) {
-          if(touches.diff.x > 0) eventType = 'swipeleft';
-          if(touches.diff.x < 0) eventType = 'swiperight';
+      } else if (Math.abs(touches.diff.x) > Math.abs(touches.diff.y)) {
+        if (Math.abs(touches.diff.x) > swipeDistance) {
+          if (touches.diff.x > 0) eventType = 'swipeleft';
+          if (touches.diff.x < 0) eventType = 'swiperight';
         }
       }
-      if(eventType) {
+      if (eventType) {
         customEvent = new Event(eventType);
         customEvent.touches = touches;
         target.dispatchEvent(customEvent);

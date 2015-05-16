@@ -1,4 +1,3 @@
-'use strict';
 import TodoStore from '../stores/TodoStore';
 import TodoActions from '../actions/TodoActions';
 import Component from '../../framework/Component';
@@ -10,9 +9,9 @@ export default class TodoTextInput extends Component {
   }
   handleEvents() {
     this.on('keydown', (event) => {
-      if(event.keyCode !== 13) return;
+      if (event.keyCode !== 13) return;
       let text = this.el.value;
-      if(!text) return;
+      if (!text) return;
       TodoActions.create(text);
     });
   }

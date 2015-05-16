@@ -1,4 +1,3 @@
-'use strict';
 import 'babel/polyfill';
 import Observer from './Observer';
 import AppDispatcher from './AppDispatcher';
@@ -8,13 +7,10 @@ const CHANGE_EVENT = 'CHANGE';
 export default class Store extends Observer {
   constructor(actions) {
     super();
-    this.actions = actions;
-    for(let key in this.actions) {
+    for (let key in actions) {
+      if (!{}.hasOwnProperty.call(actions, key)) return false;
       let action = actions[key];
-      AppDispatcher.on(key, (data) => {
-        action(data);
-        this.dispatchChange();
-      });
+      this.register(key, action);
     }
   }
   dispatchChange() {
@@ -25,6 +21,12 @@ export default class Store extends Observer {
   }
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  }
+  register(key, action) {
+    AppDispatcher.on(key, (data) => {
+      action(data);
+      this.dispatchChange();
+    });
   }
 }
 

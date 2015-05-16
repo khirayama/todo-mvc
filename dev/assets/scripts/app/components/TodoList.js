@@ -1,4 +1,3 @@
-'use strict';
 import TodoStore from '../stores/TodoStore';
 import TodoItem from './TodoItem';
 import Component from '../../framework/Component';
@@ -19,7 +18,7 @@ export default class TodoList extends Component {
   render() {
     let todo = {};
     this.el.innerHTML = '';
-    for(let i = 0; i < this.state.todos.length; i++) {
+    for (let i = 0; i < this.state.todos.length; i++) {
       todo = this.state.todos[i];
       this.el.appendChild(new TodoItem(todo).el);
     }
